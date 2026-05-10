@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SnapClip — Privacy Policy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07070e;
+      --surface: #0f0f1a;
+      --surface2: #161624;
+      --accent: #7c6aff;
+      --accent2: #ff6ab0;
+      --text: #ddddf0;
+      --dim: #6060a0;
+      --border: rgba(255,255,255,0.06);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+
+    /* ── 背景装飾 ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 80% 10%, rgba(124,106,255,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 30% at 10% 80%, rgba(255,106,176,0.08) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── ヘッダー ── */
+    header {
+      position: relative;
+      z-index: 1;
+      padding: 48px 0 40px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      background: linear-gradient(135deg, #fff 0%, var(--accent) 60%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+    .logo em {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-style: normal;
+    }
+    .tagline {
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--dim);
+      font-family: 'DM Mono', monospace;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── コンテンツ ── */
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 56px 32px 80px;
+    }
+
+    .page-title {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+    }
+    .page-title span {
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .updated {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--dim);
+      margin-bottom: 48px;
+    }
+
+    /* セクション */
+    section {
+      margin-bottom: 44px;
+      padding: 28px 32px;
+      background: var(--surface);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+
+    h2 {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      margin-bottom: 14px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    h2 .icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px; height: 28px;
+      background: rgba(124,106,255,0.15);
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    p {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.85;
+    }
+    p + p { margin-top: 12px; }
+
+    .highlight-box {
+      margin-top: 16px;
+      padding: 14px 18px;
+      background: rgba(79,255,176,0.06);
+      border: 1px solid rgba(79,255,176,0.18);
+      border-radius: 10px;
+      font-size: 13px;
+      color: #4fffb0;
+      font-family: 'DM Mono', monospace;
+      line-height: 1.7;
+    }
+
+    ul {
+      margin-top: 10px;
+      padding-left: 0;
+      list-style: none;
+    }
+    li {
+      font-size: 14px;
+      color: var(--text);
+      padding: 6px 0 6px 20px;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+    li:last-child { border-bottom: none; }
+    li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 12px;
+    }
+
+    .contact-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      border-bottom: 1px solid rgba(124,106,255,0.3);
+      transition: border-color 0.2s;
+    }
+    .contact-link:hover { border-color: var(--accent); }
+
+    /* フッター */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 32px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--dim);
+      font-family: 'DM Mono', monospace;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Snap<em>Clip</em></div>
+  <div class="tagline">Chrome Extension — Privacy Policy</div>
+</header>
+
+<div class="container">
+  <div class="page-title">Privacy <span>Policy</span></div>
+  <div class="updated">Last updated: May 9, 2026</div>
+
+  <section>
+    <h2><span class="icon">🔒</span> Summary</h2>
+    <p>SnapClip does not collect, store, transmit, or share any personal data whatsoever. All operations are performed entirely within your browser on your local device.</p>
+    <div class="highlight-box">
+      ✓ No data collection<br>
+      ✓ No external servers<br>
+      ✓ No tracking or analytics<br>
+      ✓ No account required
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="icon">📋</span> Data We Collect</h2>
+    <p>SnapClip collects <strong>no personal data</strong>. Specifically:</p>
+    <ul>
+      <li>Screenshots are captured in memory only and never written to disk by the extension</li>
+      <li>Clipboard data is written only when you explicitly press the Copy button</li>
+      <li>No browsing history, URLs, or page content is recorded</li>
+      <li>No user identifiers or device identifiers are collected</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="icon">🛠</span> Permissions Used</h2>
+    <p>SnapClip requests the following Chrome permissions, each used solely to provide core functionality:</p>
+    <ul>
+      <li><strong>activeTab</strong> — captures the currently visible tab when you initiate a screenshot</li>
+      <li><strong>scripting</strong> — injects the overlay UI into the current tab so the panel appears on-page</li>
+      <li><strong>tabs</strong> — reads the current window ID required by the capture API</li>
+    </ul>
+    <p style="margin-top:14px; font-size:13px; color: var(--dim);">No permission is used to access data on pages you visit, track navigation, or communicate with external services.</p>
+  </section>
+
+  <section>
+    <h2><span class="icon">🌐</span> Third-Party Services</h2>
+    <p>SnapClip does not integrate with, send data to, or load resources from any third-party service or server. The extension operates entirely offline after installation.</p>
+  </section>
+
+  <section>
+    <h2><span class="icon">🔄</span> Changes to This Policy</h2>
+    <p>If this policy changes, the updated version will be published on this page with a revised date. Continued use of the extension after changes constitutes acceptance of the updated policy.</p>
+  </section>
+
+  <section>
+    <h2><span class="icon">✉️</span> Contact</h2>
+    <p>If you have questions about this privacy policy or the extension, please open an issue on the extension's support page or contact the developer directly.</p>
+  </section>
+</div>
+
+<footer>
+  © 2026 SnapClip — Chrome Extension by R. Sarthee &nbsp;|&nbsp; All rights reserved
+</footer>
+
+</body>
+</html>
