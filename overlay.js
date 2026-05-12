@@ -1,4 +1,4 @@
-// overlay.js v1.4 — captureVisibleTab + 範囲トリミング (完全修正版)
+// overlay.js v1.4.1 — captureVisibleTab + 範囲トリミング (最適化・完全修正版)
 if (window.__snapclipLoaded) {
   // すでに読み込み済みの場合は何もしない（エラー防止）
 } else {
@@ -80,8 +80,7 @@ if (window.__snapclipLoaded) {
   let toastTimer = null;
 
   // ── パネル表示 ────────────────────────────────────────
-  // 【修正箇所】background.jsからのトグル指示と相殺されるのを防ぐため、ここでの自動表示を無効化しています
-  // requestAnimationFrame(() => panel.classList.add('sc-visible'));
+  // 【修正①】background.jsからのトグル指示と相殺されるのを防ぐため、ここでの自動表示処理を削除しています。
 
   // ── ドラッグ移動 ──────────────────────────────────────
   let drag = false, dragOX = 0, dragOY = 0;
@@ -132,7 +131,7 @@ if (window.__snapclipLoaded) {
   }
 
   async function copyToClipboard(dataUrl) {
-    // 修正箇所: メモリに優しい安全なBlob変換
+    // メモリに優しい安全なBlob変換
     const res = await fetch(dataUrl);
     const blob = await res.blob();
     await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
@@ -224,7 +223,7 @@ if (window.__snapclipLoaded) {
     }
 
     try {
-      // 修正箇所: GitHub等のCSPエラーを回避するための画像読み込み
+      // GitHub等のCSPエラーを回避するための画像読み込み
       const imgResponse = await fetch(res.dataUrl);
       const imgBlob = await imgResponse.blob();
       const fullImg = await createImageBitmap(imgBlob);
@@ -296,12 +295,9 @@ if (window.__snapclipLoaded) {
     showToast('クリアしました', 'info');
   });
 
+  // 【修正②】DOMを破棄せず、クラスの付け外しだけで非表示にする（メモリリーク防止）
   closeBtn.addEventListener('click', () => {
     panel.classList.remove('sc-visible');
-    setTimeout(() => {
-      root.remove();
-      window.__snapclipLoaded = false;
-    }, 300);
   });
 
   // background.jsからのメッセージ
