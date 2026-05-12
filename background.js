@@ -1,4 +1,4 @@
-// background.js v1.4 — captureVisibleTab方式 (エラー対策完了版)
+// background.js v1.4 — captureVisibleTab方式 (エラー対策完了・最適化版)
 
 chrome.action.onClicked.addListener(async (tab) => {
   // システムページや制限されたURLでは実行をブロックしてエラーを未然に防ぐ
@@ -12,14 +12,22 @@ chrome.action.onClicked.addListener(async (tab) => {
   }
 
   try {
-    await chrome.scripting.executeScript({
+    // 【修正】すでに注入済みかチェックし、CSSの無限増殖を防ぐ
+    const [{ result: isLoaded }] = await chrome.scripting.executeScript({
       target: { tabId: tab.id },
-      files: ['overlay.js']
+      func: () => window.__snapclipLoaded === true
     });
-    await chrome.scripting.insertCSS({
-      target: { tabId: tab.id },
-      files: ['overlay.css']
-    });
+
+    if (!isLoaded) {
+      await chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        files: ['overlay.js']
+      });
+      await chrome.scripting.insertCSS({
+        target: { tabId: tab.id },
+        files: ['overlay.css']
+      });
+    }
     
     // メッセージ送信。エラーをキャッチして管理画面に赤枠を出さないようにする
     chrome.tabs.sendMessage(tab.id, { action: 'toggleOverlay' }).catch((err) => {
