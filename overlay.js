@@ -80,7 +80,8 @@ if (window.__snapclipLoaded) {
   let toastTimer = null;
 
   // ── パネル表示 ────────────────────────────────────────
-  requestAnimationFrame(() => panel.classList.add('sc-visible'));
+  // 【修正箇所】background.jsからのトグル指示と相殺されるのを防ぐため、ここでの自動表示を無効化しています
+  // requestAnimationFrame(() => panel.classList.add('sc-visible'));
 
   // ── ドラッグ移動 ──────────────────────────────────────
   let drag = false, dragOX = 0, dragOY = 0;
